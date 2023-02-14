@@ -23,7 +23,7 @@ services:
       interval: 3m
       timeout: 30s
       retries: 3
-      start_period: 10S
+      start_period: 10s
 
 networks:
   nginx-proxymng-net:
