@@ -13,6 +13,7 @@ services:
       - '$(pwd)/etc_letsencrypt:/etc/letsencrypt'
     environment:
       - DISABLE_IPV6=true
+      - DB_SQLITE_FILE=/data/database.sqlite
       - X_FRAME_OPTIONS=sameorigin
     hostname: 'ct-nginxpmng'
     networks:
