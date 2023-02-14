@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:2.9.9'
+    container_name: 'nginx-proxy-manager'
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - '$(pwd)/var_lib_data:/data'
+      - '$(pwd)/etc_letsencrypt:/etc/letsencrypt'
+    environment:
+      - DISABLE_IPV6=true
+      - X_FRAME_OPTIONS=sameorigin
+    hostname: 'ct-nginxpmng'
+    networks:
+      - nginx-proxymng-net
+    restart: 'unless-stopped'
+    healthcheck:
+      test: [ 'CMD', '/bin/check-health' ]
+      interval: 3m
+      timeout: 30s
+      retries: 3
+      start_period: 10S
+
+networks:
+  nginx-proxymng-net:
+    name: 'nginx-proxymng-net'
+    ipam:
+      driver: default
+      config:
+        - subnet: '172.18.0.0/28'
