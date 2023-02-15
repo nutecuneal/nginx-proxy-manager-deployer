@@ -15,13 +15,12 @@ services:
       - DISABLE_IPV6=true
       - DB_SQLITE_FILE=/data/database.sqlite
       - X_FRAME_OPTIONS=sameorigin
-    hostname: 'ct-nginxpmng'
     networks:
       - nginx-proxymng-net
-    restart: 'unless-stopped'
+    restart: unless-stopped
     healthcheck:
       test: [ 'CMD', '/bin/check-health' ]
-      interval: 3m
+      interval: 1m30s
       timeout: 30s
       retries: 3
       start_period: 10s
