@@ -10,7 +10,7 @@ services:
       - '443:443' # HTTS Port
     volumes:
       - $(pwd)/npm_data:/data
-      - $(pwd)/letsencrypt:/etc/letsencrypt
+      - $(pwd)/letsencrypt:/etc/letsencrypt:ro
     environment:
       - PUID=1024
       - PGID=1024
