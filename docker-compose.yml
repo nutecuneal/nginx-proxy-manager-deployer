@@ -2,16 +2,18 @@ version: '3.8'
 
 services:
   app:
-    image: 'jc21/nginx-proxy-manager:2.9.9'
+    image: 'jc21/nginx-proxy-manager:2.10.3'
     container_name: 'nginx-proxy-manager'
     ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+      - '80:80' # HTTP Port
+      - '81:81' # Nginx Proxy Manager Web Admin
+      - '443:443' # HTTS Port
     volumes:
-      - '$(pwd)/var_lib_data:/data'
-      - '$(pwd)/etc_letsencrypt:/etc/letsencrypt'
+      - '$(pwd)/npm_data:/data'
+      - '$(pwd)/letsencrypt:/etc/letsencrypt'
     environment:
+      - PUID=1024
+      - PGID=1024
       - DISABLE_IPV6=true
       - DB_SQLITE_FILE=/data/database.sqlite
       - X_FRAME_OPTIONS=sameorigin
